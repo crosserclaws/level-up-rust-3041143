@@ -1,5 +1,18 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+fn median(mut a: Vec<f32>) -> Option<f32> {
+    if a.is_empty() {
+        return None;
+    }
+
+    a.sort_by(|a, b| a.partial_cmp(b).unwrap());
+
+    let is_odd = a.len() & 1 == 1;
+    let mid = a.len()/2;
+    let median: f32 = if is_odd {
+        a[mid]
+    } else {
+        (a[mid-1] + a[mid])/2.0
+    };
+    Some(median)
 }
 
 fn main() {
