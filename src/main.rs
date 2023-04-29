@@ -1,5 +1,7 @@
-fn info(a: &T) {
-    todo!();
+use std::fmt::Display;
+
+fn info<T: Display>(a: &T) {
+    println!("{}", a);
 }
 
 fn main() {
@@ -10,9 +12,8 @@ fn main() {
 
     // Advanced 1
     // use std::ffi::CString;
-    
     // let c = CString::new("?").unwrap();
-    // info(&input);
+    // info(&c);
 
     // Advanced 2
     // use std::path::Path;
