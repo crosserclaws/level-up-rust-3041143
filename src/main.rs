@@ -1,5 +1,11 @@
+use chrono::prelude::*;
+
+const DATE_FORMAT: &str = "%Y-%m-%d";
+
 fn weeks_between(a: &str, b: &str) -> i32 {
-    todo!()
+    let t1 = NaiveDate::parse_from_str(a, DATE_FORMAT).unwrap();
+    let t2 = NaiveDate::parse_from_str(b, DATE_FORMAT).unwrap();
+    (t2 - t1).num_days() as i32 / 7
 }
 
 fn main() {
