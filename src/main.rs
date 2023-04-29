@@ -120,6 +120,7 @@ fn hello_world() {
 fn whole_alphabet() {
     let alphabet = "abcdefghijklmnopqrstuvwxyz1234567890".to_string();
 
-    alphabet.to_morse_code();
-    alphabet.to_uppercase().to_morse_code();
+    let lower = alphabet.to_morse_code();
+    let upper = alphabet.to_uppercase().to_morse_code();
+    assert_eq!(lower, upper);
 }
