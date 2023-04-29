@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 enum Card {
     Ace,
     Two,
@@ -32,8 +32,20 @@ impl Hand {
     }
 
     fn value(&self) -> usize {
-        // TODO: implement this method
-        0 
+        let mut ace_count = 0;
+        let mut val = 0;
+        for card in &self.cards {
+            match card {
+                Card::Ace => { ace_count += 1; val += 11; },
+                v @ (Card::Two | Card::Three | Card::Four | Card::Five | Card::Six | Card::Seven | Card::Eight | Card::Nine) => val += (*v as usize) +1,
+                Card::Jack | Card::Queen | Card::King => val += 10,
+            }
+        }
+        while ace_count > 0 && val > 21 {
+            val -= 10;
+            ace_count -= 1;
+        }
+        val
     }
 
     fn is_loosing_hand(&self) -> bool {
@@ -70,7 +82,7 @@ fn risky_hand() {
     hand.add(Card::King);
     hand.add(Card::Queen);
     hand.add(Card::Ace);
-    
+
     assert_eq!(hand.value(), 21);
 }
 
@@ -80,7 +92,7 @@ fn oops() {
     hand.add(Card::King);
     hand.add(Card::Seven);
     hand.add(Card::Five);
-    
+
     assert!(hand.is_loosing_hand());
     assert_eq!(hand.value(), 22);
 }
